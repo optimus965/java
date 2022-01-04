@@ -26,7 +26,6 @@ class Q1 {
             value  = true;
             System.out.println("GOT:" + this.n);
             notify();
-
     }
 }
 class producer1 implements runnable1 {
@@ -63,7 +62,5 @@ class interthread2 {
         consumer1 c =new consumer1(q1);
         p.t.start();
         c.t.start();
-        System.out.println("press control-c to stop");
-    }
+        System.out.println("press control-c to stop");}
 }
-
