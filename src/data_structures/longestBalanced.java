@@ -1,7 +1,6 @@
 package data_structures;
 import java.util.*;
 import java.util.Stack;
-
 class LongBalance {
     int depth = 0;
     int maxdepth = 0;
