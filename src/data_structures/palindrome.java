@@ -1,6 +1,5 @@
 package data_structures;
 import java.util.Stack;
-
 class palindrom {
     public void palindrom(String str) {
         int i = 0;
@@ -19,8 +18,6 @@ class palindrom {
                     break;
                 }
             }
-
-
         }
         else {
             System.out.println("the given number is a palindrome");
