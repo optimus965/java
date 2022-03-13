@@ -1,15 +1,14 @@
 package Graph6;
 import java.util.*;
 class Graph {
-    int count;
     LinkedList<LinkedList<Edge>> adj;
     Graph(int value) {
-        adj = new LinkedList<LinkedList<Edge>>();
+        adj = new LinkedList<>();
         for(int i = 0; i < value;i++) {
             adj.add(new LinkedList<Edge>());
         }
     }
-    class Edge {
+    static class Edge {
         int desintation;
         int cost;
         Edge(int desintation) {
@@ -52,10 +51,25 @@ class Graph {
             i = i + 1;
         }
     }
+    public void dfs(int source, Graph gph,boolean[] visited1) {
+        LinkedList<Edge> sour = gph.adj.get(source);
+        for(Edge edge: sour) {
+            if(!visited1[edge.desintation]) {
+                visited1[edge.desintation] = false;
+                dfs(edge.desintation, gph,visited1);
+            }
+        }
+
+        System.out.print(source);
+    }
+
 }
 class Dfs1 {
     int value8 = 0;
     int cn = 0;
+    int count = 0;
+    boolean[] visited = new boolean[9];
+    ArrayDeque<Integer> que = new ArrayDeque<>();
     Stack<Integer> stk = new Stack<Integer>();
     Stack<Integer> stack  = new Stack<Integer>();
     public boolean stackdfs(Graph gph,int source,int target,int value1) {
@@ -66,7 +80,7 @@ class Dfs1 {
             int index = stack.pop();
             LinkedList<Graph.Edge> edge = gph.adj.get(index);
             for(Graph.Edge edge1: edge) {
-                if(visited[edge1.desintation] == false) {
+                if(!(visited[edge1.desintation])) {
                     visited[edge1.desintation] = true;
                     stack.push(edge1.desintation);
                 }
@@ -74,16 +88,12 @@ class Dfs1 {
         }
         return visited[target];
     }
-    public  boolean dfs(Graph gph1, int source, int target, int value) {
-        boolean[] visited = new boolean[value];
-        dfsutil(gph1, source, visited);
-        return visited[target];
-    }
+
     public void dfsutil(Graph gph, int source,boolean[] visited) {
         visited[source] = true;
         LinkedList<Graph.Edge> linked =gph.adj.get(source);
         for(Graph.Edge edge: linked) {
-            if(visited[edge.desintation] == false) {
+            if(!(visited[edge.desintation])) {
                 dfsutil(gph, edge.desintation,visited);
             }
         }
@@ -97,7 +107,7 @@ class Dfs1 {
             int value1 = que.remove();
             LinkedList<Graph.Edge> edge = gph1.adj.get(value1);
             for(Graph.Edge edge1: edge){
-                if(visited[edge1.desintation] == false) {
+                if(!(visited[edge1.desintation])) {
                     visited[edge1.desintation]  = true;
                     que.add(edge1.desintation);
                 }
@@ -109,28 +119,26 @@ class Dfs1 {
         boolean[] visited = new boolean[value];
         Stack<Integer> stack = new Stack<Integer>();
         for(int i = 0;i <value;i++) {
-            if (visited[i] == false) {
+            if (!visited[i]) {
                 dfsutil2(gph,visited,i,stack);
             }
         }System.out.println("the topological sort: ");
-        while(stack.isEmpty() == false) {
+        while(!(stack.isEmpty())) {
             System.out.print(" " + stack.pop());
         }System.out.println("");
     }
     public void dfsutil2(Graph gph,boolean[] visited,int source,Stack<Integer> stack) {
         visited[source] = true;
         LinkedList<Graph.Edge> adj = gph.adj.get(source);
-
         for(Graph.Edge edge: adj) {
-            if(visited[edge.desintation] == false) {
+            if(!visited[edge.desintation]) {
                 dfsutil2(gph,visited,edge.desintation,stack);
             }
         }
         stack.push(source);
-
-
     }
-    public void countAlPath(Graph gph, int source ,int destination,int no) {
+    public void countAlPath(Graph gph, int source ,int destination,int no)
+    {
         stk.add(source);
         if(source == destination) {
             if(cn == 0) {
@@ -138,40 +146,63 @@ class Dfs1 {
                 System.out.println("the possible paths are :");
             }
             System.out.println(stk + "\n");
-            stk.pop();
             value8 = value8 + 1;
+            return;
         }
-        boolean[] visited = new boolean[no];
         LinkedList<Graph.Edge> edge = gph.adj.get(source);
         for(Graph.Edge edge1: edge) {
-            if(visited[edge1.desintation] == false) {
-                visited[edge1.desintation] = true;
+            if(!visited[edge1.desintation]) {
+                visited[source] = true;
                 countAlPath(gph, edge1.desintation, destination,no);
-
+                 stk.pop();
             }
         }
-        if(stk.size() > 1) stk.pop();
-
+        visited[source] = false;
     }
     public void count5(Graph gp, int source, int destination, int count) {
         countAlPath(gp,source,destination,count);
         System.out.println("possible no of path are :" + value8);
+    }
+    public void dfs(Graph gph, int source, boolean[] visited1) {
+        visited1[source] = true;
+        LinkedList<Graph.Edge> new1 = gph.adj.get(source);
+
+        for(Graph.Edge edge1: new1) {
+            if(!visited1[edge1.desintation]) {
+                visited1[edge1.desintation] = false;
+                dfs(gph, edge1.desintation, visited1);
+            }
+        }
+        if(count == 0) {
+            System.out.println("the path as per the dfs are ");
+        }
+        count = 10;
+        System.out.print(source + " ");
+
     }
 }
 
 public class Dfs {
     public static void main(String[] args) {
         Dfs1 dfs3 = new Dfs1();
-        Graph gph = new Graph(6);
+        Graph gph = new Graph(9);
+        boolean[] visited2 = new boolean[9];
         gph.addDirectedEdge(1, 2, 1);
         gph.addDirectedEdge(2, 5, 1);
         gph.addDirectedEdge(3, 5, 1);
         gph.addDirectedEdge(2, 3, 1);
+        gph.addDirectedEdge(1,4,1);
         gph.addDirectedEdge(4, 3, 1);
-        gph.addDirectedEdge(1, 4, 1);
+        gph.addDirectedEdge(4,1,1);
+        gph.addDirectedEdge(2,6,1);
+        gph.addDirectedEdge(6,8,1);
+        gph.addDirectedEdge(7,8,1);
+        gph.addDirectedEdge(3,7,1);
+        gph.addDirectedEdge(5,8,1);
         gph.print();
-        dfs3.topological(gph, 6);
-        dfs3.count5(gph, 1, 5, 6);
+        dfs3.topological(gph, 9);
+        dfs3.count5(gph, 1, 8, 9);
+        dfs3.dfs(gph,1,visited2);
 
     }
 }
