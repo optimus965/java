@@ -2,6 +2,8 @@ package Graph6;
 import java.util.*;
 class Dfs1 {
     int value8 = 0;
+    int cn = 0;
+    Stack<Integer> stk = new Stack<Integer>();
     Stack<Integer> stack  = new Stack<Integer>();
     public boolean stackdfs(Graph gph,int source,int target,int value1) {
         boolean[] visited = new boolean[value1];
@@ -57,10 +59,10 @@ class Dfs1 {
             if (visited[i] == false) {
                 dfsutil2(gph,visited,i,stack);
             }
-        }System.out.print("the topological sort: ");
+        }System.out.println("the topological sort: ");
         while(stack.isEmpty() == false) {
             System.out.print(" " + stack.pop());
-        }
+        }System.out.println("");
     }
     public void dfsutil2(Graph gph,boolean[] visited,int source,Stack<Integer> stack) {
         visited[source] = true;
@@ -76,7 +78,14 @@ class Dfs1 {
 
     }
     public void countAlPath(Graph gph, int source ,int destination,int no) {
+        stk.add(source);
         if(source == destination) {
+            if(cn == 0) {
+                cn = cn + 7;
+                System.out.println("the possible path are :");
+            }
+            System.out.println(stk + "\n");
+            stk.pop();
             value8 = value8 + 1;
         }
         boolean[] visited = new boolean[no];
@@ -85,8 +94,11 @@ class Dfs1 {
             if(visited[edge1.desintation] == false) {
                 visited[edge1.desintation] = true;
                 countAlPath(gph, edge1.desintation, destination,no);
+
             }
         }
+        if(stk.size() > 1) stk.pop();
+
     }
     public void count5(Graph gp, int source, int destination, int count) {
         countAlPath(gp,source,destination,count);
@@ -98,17 +110,16 @@ public class Dfs {
     public static void main(String[] args) {
         Dfs1 dfs3 = new Dfs1();
         Graph gph = new Graph(6);
-        gph.addDirectedEdge(0, 1, 3);
-        gph.addDirectedEdge(0, 4, 2);
         gph.addDirectedEdge(1, 2, 1);
+        gph.addDirectedEdge(2, 5, 1);
+        gph.addDirectedEdge(3, 5, 1);
         gph.addDirectedEdge(2, 3, 1);
-        gph.addDirectedEdge(4, 1, -2);
         gph.addDirectedEdge(4, 3, 1);
+        gph.addDirectedEdge(1, 4, 1);
         gph.print();
-        dfs3.topological(gph,6);
-        dfs3.count5(gph,5,1,5);
+        dfs3.topological(gph, 6);
+        dfs3.count5(gph, 1, 5, 6);
 
     }
-
-
 }
+
