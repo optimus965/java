@@ -23,6 +23,9 @@ class Graph2 {
             System.out.println( " ");
         }
     }
+    public void topologicalSort(Graph1 gph) {
+
+    }
 }
 class Graph  {
     public static void main(String[] args) {

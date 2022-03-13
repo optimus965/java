@@ -41,6 +41,8 @@ class Graph1 {
             i++;
         }
     }
+    public void topologicalSort(Graph1 gph) {
+    }
 }
 class adjacencyList {
     public static void main(String[] args) {

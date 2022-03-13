@@ -56,6 +56,37 @@ class DFS {
                 }
             }
         }
+
+    }
+    public void toplogicalSort(Graph1 gph,int count) {
+        Stack<Integer> stack = new Stack<>();
+        boolean[] visited = new boolean[count];
+        for(int i = 0; i < count; i++) {
+            if(visited[i] == false) {
+                dfsutil2(gph,i,visited,stack);
+            }
+        }
+    }
+    public void dfsutil2(Graph1 gph, int index, boolean[] visited,Stack<Integer> stack2) {
+        visited[index] = true;
+        LinkedList<Graph1.Edge> Edge3  = gph.linkde.get(index);
+        for(Graph1.Edge edge:Edge3) {
+            if(visited[edge.destination] == false) {
+                dfsutil2(gph,edge.destination,visited,stack2);
+            }
+        }
+        stack2.push(index);
     }
 }
+/*
+// Your First C++ Program
+
+#include <iostream>
+
+int main() {
+    std::cout << "Hello World!";
+    return 0;
+}
+
+* */
 
