@@ -202,6 +202,40 @@ class Dfs1 {
 
         }
     }
+    boolean[] new9 = new boolean[9];
+    int numvwe = 0;
+    int sum = 0;
+    public void allpossiblePaths(Graph gph) {
+        for(int i = 0; i< 9; i ++) {
+           dfsutile1(gph, i);
+           if(numvwe == 0) {
+               System.out.print("0" +  "    " + "1" +  "     " + "2" +  "      "+  "3" +"     " +  "4" + "    " + "5" + "     " +  "6" + "    " +  "7" + "    " +  "8"  + "\n");
+           }
+
+           for(int j = 0; j < 9; j++) {
+               if(sum == 0) {
+                   System.out.print(i + ":");
+               }
+               sum = 10;
+               System.out.print(new9[j] + "  ");
+           }
+           System.out.print("\n");
+           numvwe = 9;
+           sum = 0;
+           new9 = new boolean[9];
+
+        }
+    }
+    public void dfsutile1(Graph gp,int source) {
+        new9[source] = true;
+        LinkedList<Graph.Edge> edge = gp.adj.get(source);
+        for(Graph.Edge ed: edge) {
+            if(!new9[ed.desintation]) {
+                dfsutile1(gp, ed.desintation);
+            }
+        }
+    }
+
     public void dfsutile(Graph gp,int source) {
         new2[source] = true;
         LinkedList<Graph.Edge> edge = gp.adj.get(source);
@@ -233,11 +267,13 @@ public class Dfs {
         gph.addDirectedEdge(7,8,1);
         gph.addDirectedEdge(3,7,1);
         gph.addDirectedEdge(5,8,1);
+
         gph.print();
         dfs3.topological(gph, 9);
         dfs3.count5(gph, 1, 8, 9);
         dfs3.dfs(gph,1,visited2);
         dfs3.root2(gph);
+        dfs3.allpossiblePaths(gph);
     }
 }
 
