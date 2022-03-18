@@ -267,7 +267,6 @@ public class Dfs {
         gph.addDirectedEdge(7,8,1);
         gph.addDirectedEdge(3,7,1);
         gph.addDirectedEdge(5,8,1);
-
         gph.print();
         dfs3.topological(gph, 9);
         dfs3.count5(gph, 1, 8, 9);
