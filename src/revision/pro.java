@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.Map;
 class sum {
     Map<Integer,Integer> k1 = new HashMap<>();
+    //prime
     public boolean prime(int n) {
         int count = 0;
         for(int i = 2;i < n;i++) {
@@ -13,6 +14,7 @@ class sum {
         if(count == 1) return false;
         else return true;
     }
+    //perfect Number
     public boolean perfe(int n) {
         int temp;
         int sum = 0;
@@ -22,15 +24,18 @@ class sum {
        if(sum == n) return true;
        else return false;
     }
+    // fibanocci numbers
     public int fibanocci(int n) {
         if(n <= 1) return 1;
         return fibanocci(n - 1) + fibanocci(n - 2);
     }
+    //factorial number
     public int factorial(int n) {
         if(n <= 0) return 1;
         return n * factorial(n - 1);
 
     }
+    // armstrong
     public boolean armstrong(int n) {
         int original = n;
         int temp;
@@ -43,6 +48,7 @@ class sum {
         if( original == sum) return true;
         else  return false;
     }
+    // gcd
     int gcdByBruteForce(int n1, int n2) {
         int gcd = 1;
         for (int i = 1; i <= n1 && i <= n2; i++) {
@@ -52,6 +58,7 @@ class sum {
         }
         return gcd;
     }
+    // sum of the numbers
     public int sum1(int n) {
         int sum = 0;
         for(int i = 1 ; i <= n;i++) {
@@ -63,7 +70,7 @@ class sum {
 public class pro {
     public static void main(String[] args){
         sum prime1 = new sum();
-        System.out.println(prime1.sum1(3));
+        System.out.println(prime1.sum1(4));
 
     }
 }
