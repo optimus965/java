@@ -43,9 +43,9 @@ public class practice {
             }
         }
     }
-    public static void main(String args[])
+    public static void main(String[] args)
     {
-        practice Queen = new practice(12);
+        practice Queen = new practice(13);
         System.out.println(Queen.count);
     }
 }
